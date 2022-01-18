@@ -1,0 +1,28 @@
+.wrap{
+  background-color: #eef8ff;
+.content{
+  position: relative;
+  .title{
+    position: absolute;
+    background: rgba(74, 74, 74, 0.8);
+    border-top-right-radius: 50px;
+    left: 50px;
+    top: 200px;
+    width: 350px;
+    padding: 50px;
+    h1{
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+      line-height: 1.5;
+      text-align: center;
+    }
+  }
+  img{
+    object-fit: cover;
+    width: 100%;
+
+  }
+
+}
+}
