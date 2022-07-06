@@ -1,0 +1,89 @@
+.loader{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+    animation: loader 1.5s linear infinite;
+}
+.loader div{
+    height: 5vw;
+    max-height: 100%;
+    width: 2vw;
+    max-width: 100%;
+    margin: auto;
+    border-radius: 0vw 10vw 0vw 10vw;
+    box-shadow: inset 0vw 0vw 0vw .1vw #e618ca, 0vw 0vw 1.5vw 0vw #e618ca;
+    overflow: auto;
+    position: absolute;
+}
+.loader .one{
+    transform: rotate(45deg);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 7.5vw;
+    animation: animate 1s ease infinite;
+}
+.loader .two{
+    transform: rotate(90deg);
+    left: 5.5vw;
+    right: 0;
+    top: 0;
+    bottom: 5.5vw;
+    animation: animate 1s .125s ease infinite;
+}
+.loader .three{
+    transform: rotate(135deg);
+    left: 7.5vw;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    animation: animate 1s .25s ease infinite;
+}
+.loader .four{
+    transform: rotate(180deg);
+    left: 5.5vw;
+    right: 0;
+    top: 5.5vw;
+    bottom: 0;
+    animation: animate 1s .375s ease infinite;
+}
+.loader .five{
+    transform: rotate(225deg);
+    left: 0;
+    right: 0;
+    top: 7.5vw;
+    bottom: 0;
+    animation: animate 1s .5s ease infinite;
+}
+.loader .six{
+    transform: rotate(270deg);
+    left: 0;
+    right: 5.5vw;
+    top: 5.5vw;
+    bottom: 0;
+    animation: animate 1s .625s ease infinite;
+}
+.loader .seven{
+    transform: rotate(315deg);
+    left: 0;
+    right: 7.5vw;
+    top: 0;
+    bottom: 0;
+    animation: animate 1s .750s ease infinite;
+}
+.loader .eight{
+    transform: rotate(360deg);
+    left: 0;
+    right: 5.5vw;
+    top: 0;
+    bottom: 5.5vw;
+    animation: animate 1s .875s ease infinite;
+}
+@keyframes loader{
+    0%{ transform: rotate(0deg); }
+    100%{ transform: rotate(-360deg); }
+}
+@keyframes animate{
+    50%{ box-shadow: inset 0vw 0vw 0vw .1vw #03cccf, 0vw 0vw 1.5vw 0vw #03cccf; }
+}

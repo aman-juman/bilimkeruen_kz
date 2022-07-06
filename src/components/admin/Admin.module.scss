@@ -1,0 +1,33 @@
+.wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 100px;
+  background-color: white;
+  margin: 50px 0;
+  .rowSetContent{
+    display: flex;
+    justify-content: center;
+    .setContent{
+      padding: 10px 30px;
+      margin: 10px 40px;
+      border-radius: 10px;
+      border: none;
+      background-color: #9fbbff;
+    }
+    .active{
+      background-color: #ff9805;
+    }
+  }
+  .content{
+    border: 1px solid #808080;
+    margin: 30px 0;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+}

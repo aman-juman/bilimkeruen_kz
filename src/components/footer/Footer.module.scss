@@ -1,8 +1,7 @@
 @import "../../styles/variables";
 .footer{
+  margin-top: auto;
   background-color: $colorDark;
-  //position: fixed;
-  bottom: 0;
   height: 350px;
   width: 100%;
   display: flex;

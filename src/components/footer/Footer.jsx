@@ -9,6 +9,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import {NavLink} from "react-router-dom";
 
 function Copyright(props) {
     return (
@@ -35,7 +36,7 @@ export const Footer = () =>{
     return (
         <footer className={styles.footer}>
             <div className={styles.wrap}>
-                <div className={styles.logo}><img src="/logo.png" alt="logo"/></div>
+                <NavLink to='/'><div className={styles.logo}><img src="/logo.png" alt="logo"/></div></NavLink>
                 <ul>
                     {social.map(item =>(
                         <li key={item.name}><a href={item.href}>{item.icon}</a></li>

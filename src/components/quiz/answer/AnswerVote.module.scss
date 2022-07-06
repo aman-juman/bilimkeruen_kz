@@ -1,0 +1,21 @@
+.answer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #363636;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 18px 0;
+  .vote{
+    font-size: 12px;
+    color: #404040;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .title{
+    font-size: 20px;
+    color: #343434;
+    font-weight: bold;
+  }
+
+}

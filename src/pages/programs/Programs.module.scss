@@ -1,0 +1,73 @@
+@import "../../styles/variables";
+@import "../../styles/globals";
+
+.wrap {
+
+  .titleBackground {
+    background-image: url("./background.jpg");
+    background-size: cover;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    max-height: 220px;
+    height: 100%;
+
+
+    .titleWrap{
+      h2{
+        color: white;
+        padding: 70px;
+        font-size: 35px;
+        text-transform: uppercase;
+        //font-weight: bold;
+        &:before{
+          content: '';
+          padding-left: 30px;
+          border-left: 3px solid white;
+        }
+        @include medium{
+          font-size: 25px;
+        }
+      }
+    }
+  }
+
+  .contentWrap{
+    display: flex;
+    flex-direction: column;
+
+
+    .content{
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      margin: 40px;
+      border-bottom: 1px solid $colorDarkLight;
+
+
+      h3{
+
+      }
+
+      .download{
+        justify-self: end;
+        .linkDownload{
+          text-decoration: none;
+          color: black;
+          .downloadIcon{
+            font-size: 30px;
+            cursor: pointer;
+            transition: all ease-in-out 0.5s;
+
+            &:hover{
+              color: $colorGoldDark;
+              transform: scale(1.2);
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+}

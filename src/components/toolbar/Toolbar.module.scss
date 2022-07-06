@@ -3,7 +3,15 @@
 .toolbar{
   background-color: #fff;
   height: 80px;
-  z-index: -3;
+
+  .burgerMenu{
+    display: none;
+    background-color: #ff9805;
+
+    @include mobile{
+      display: block;
+    }
+  }
 }
 .wrap{
   display: grid;
@@ -12,18 +20,43 @@
   grid-gap: 10px;
   align-items: center;
   justify-items: center;
+  margin-bottom: 20px;
 
 
+  @include mobile{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .empty{
+    display: none;
+    @include mobile{
+      display: block;
+    }
+  }
   .logo{
     grid-area: logo;
     width: 80px;
     height: 80px;
-    opacity: 0.8;
     cursor: pointer;
-    transition: all ease-in-out 0.5s;
-    &:hover{
-      transform: scale(0.95);
-      opacity: 1;
+    transition: all ease-in-out ;
+    animation: scale 2s infinite;
+    @include mobile{
+      //margin-right: 200px;
+    }
+    @keyframes scale {
+      0%{
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50%{
+        transform: scale(0.95);
+        opacity: 1;
+      }
+      100%{
+        transform: scale(1);
+        opacity: 0.8;
+      }
     }
   }
 
@@ -35,9 +68,7 @@
     justify-self: end;
 
     @include mobile {
-      font-size: 10px;
-      justify-content: center;
-      text-align: center;
+      display: none;
     }
 
 
@@ -98,7 +129,13 @@
       }
     }
   }
+  .avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
 
+
+  }
   .login{
     grid-area: login;
     color: $colorGoldDark;

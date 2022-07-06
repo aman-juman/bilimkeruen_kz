@@ -5,20 +5,22 @@
   .title{
     position: absolute;
     background: rgba(74, 74, 74, 0.8);
-    border-top-right-radius: 50px;
-    left: 50px;
-    top: 200px;
-    width: 350px;
-    padding: 50px;
+    border-bottom-right-radius: 50px;
+    left: 2rem;
+    top: 5rem;
+    max-width: 300px;
+    width: 100%;
+    padding: 1rem;
     h1{
       color: white;
-      font-size: 35px;
+      font-size: 1.2em;
       font-weight: bold;
       line-height: 1.5;
       text-align: center;
     }
   }
   img{
+    border-top-left-radius: 90%;
     object-fit: cover;
     width: 100%;
 
@@ -26,3 +28,4 @@
 
 }
 }
+

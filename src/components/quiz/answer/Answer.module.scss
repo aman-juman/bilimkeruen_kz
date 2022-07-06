@@ -1,0 +1,15 @@
+.answer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #8c6827;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 18px 0;
+  .title{
+    font-size: 20px;
+    color: #8c6827;
+    font-weight: bold;
+  }
+
+}

@@ -24,9 +24,11 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 body {
+    height: 100%;
     line-height: 1;
     /*font-family: 'Montserrat', sans-serif;*/
     font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
 }
 ol, ul {
     list-style: none;
@@ -43,15 +45,28 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
+.wrapper{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+.main{
+    top: 100px;
+flex: 1 auto;
+}
 .container{
     max-width: 1280px;
     width: 100%;
     margin: 0 auto;
 }
 $width: 768px;
+@mixin medium{
+    @media (max-width: #{768px}){
+        @content
+    }
+}
 @mixin mobile{
-    @media (max-width: #{$width}){
+    @media (max-width: #{630px}){
         @content
     }
 }

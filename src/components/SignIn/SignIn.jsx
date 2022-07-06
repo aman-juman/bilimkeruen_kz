@@ -3,16 +3,27 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useState} from "react";
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import GoogleIcon from '@mui/icons-material/Google';
+import {useContext} from "react";
+import {Context} from "../../index";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged, sendPasswordResetEmail,signOut
+} from 'firebase/auth'
+import {Navigate} from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {addUserAction, removeUserAction} from "../../store/userReducer";
+import {useEffect} from "react";
+
 
 function Copyright(props) {
     return (
@@ -27,33 +38,66 @@ function Copyright(props) {
     );
 }
 
+
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({user, setUser, logOut, isAdmin}) {
+    const userState = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const {auth} = useContext(Context);
+    const handleGoogleSignIn = async () => {
+        const provider = new GoogleAuthProvider();
+        const {user} = await signInWithPopup(auth, provider);
+        setUser(user)
+        const {accessToken, displayName, email, uid, photoURL} = user;
+        dispatch(addUserAction({
+            uid,
+            fullName: displayName,
+            email,
+            photoUrl: photoURL,
+            accessToken
+        }));
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
+        const email = data.get('email');
+        const password = data.get('password');
+        try {
+           signInWithEmailAndPassword(auth, email, password)
+               .then(data => {
+                   console.log("DATA", data);
+                   setUser(data.user);
+                   const {email, accessToken, uid, displayName} = data.user;
+                   dispatch(addUserAction({
+                       uid,
+                       fullName: displayName,
+                       email,
+                       accessToken
+                   }))
+               });
+        } catch (e) {
+            console.log(e.message)
+        };
+    };
+
+    const sendEmailPasswordToFirebase = async (email, password) => {
+        try {
+            // const response = await createUserWithEmailAndPassword(auth, email = 'example@example.com', password = '123456');
+            // console.log(response);
+            const response = await sendPasswordResetEmail(auth, email = '87711441333@mail.ru')
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
+    };
 
 
-        // console.log({
-        //     email: data.get('email'),
-        //     password: data.get('password'),
-        // });
-        setLoading(prev =>!prev)
-        setTimeout(() =>{
-            handleError()
-        }, 1500)
-    };
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const handleError = () =>{
-      setError(prev=> !prev)
-    };
+
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
+                <CssBaseline/>
                 <Box
                     sx={{
                         marginTop: 8,
@@ -62,13 +106,13 @@ export default function SignIn() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: loading ?'secondary.main' : 'primary.main' }}>
-                        <LockOutlinedIcon />
+                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                        <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Жеке кабинет
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"
                             required
@@ -89,19 +133,17 @@ export default function SignIn() {
                             id="password"
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Мені есте сақта"
-                        />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{mt: 3, mb: 2}}
                         >
                             Кіру
                         </Button>
-                        <Typography display={!error && "none"} color="red" component="h2" variant="h5">Қате терілді</Typography>
+                        <Button onClick={handleGoogleSignIn}><GoogleIcon /> Google аккаунт арқылы кіру</Button>
+                        {/*<Button onClick={() => sendEmailPasswordToFirebase()}>Change</Button>*/}
+                        {/*<Button onClick={() => logOut()}>Logout</Button>*/}
                         {/*<Grid container>*/}
                         {/*    <Grid item xs>*/}
                         {/*        <Link href="#" variant="body2">*/}
@@ -116,7 +158,7 @@ export default function SignIn() {
                         {/*</Grid>*/}
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
+                <Copyright sx={{mt: 8, mb: 4}}/>
             </Container>
         </ThemeProvider>
     );
